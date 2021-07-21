@@ -1,11 +1,12 @@
 body{
     background-image: url("../images/space.jpg");
-    background-size: 100%;
+    background-size: cover;
 }
 
 #navbar-image{
     height: 35px;
 }
+
 
 #div-bottom-navbar{
     background-color:#C63C32 ;
@@ -15,40 +16,60 @@ body{
 
 #top-div{
     color: lightgrey;
-    
     text-align: center;
 
     margin-top: 50px;
 }
 
+
 #cards-div{
-    margin-top: 50px;
-    margin-right: 200px;
-    margin-left: 200px;
+    margin-top: 2%;
+    margin-left: 15%;
+    margin-right: 15%;
+}
+
+.a-card{
+    color:inherit;
+    text-decoration: inherit;
 }
 
 .card{
-    background-color: #C63C32;
+    background-color: #eae8e7;
     border-radius: 10px;
-    opacity: 41%;
+    opacity:51%;
     text-align: center;
     font-size: larger;
-    padding-left: 10px;
-    padding-right: 10px;
+
+    padding-top: 10%;
+    padding-bottom: 10%;
+
+    transition: 0.2s;
+    transform: scale(1.0);
+    -webkit-transform: scale(1.0);
+    -moz-transform: scale(1.0);
+    -ms-transform: scale(1.0);
+    -o-transform: scale(1.0);
 }
 
+.card:hover{
+    transform: scale(1.05);
+    -webkit-transform: scale(1.05);
+    -moz-transform: scale(1.05);
+    -ms-transform: scale(1.05);
+    -o-transform: scale(1.05);
+    transition: 0.2s;
+}
 
 .btn{
-    position: absolute;
-    margin-left: auto;
-    margin-right: auto;
-    
     opacity: 100%;
+    margin-top: 10px;
     padding-left: 20px;
     padding-right: 20px;
     border-radius: 10px;
-    -webkit-border-radius: 10px;
-    -moz-border-radius: 10px;
-    -ms-border-radius: 10px;
-    -o-border-radius: 10px;
+    
+}
+
+.modal-content{
+    background-color: #b84717;
+    color: #f0f0f0;
 }
