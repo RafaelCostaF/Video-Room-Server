@@ -1,0 +1,23 @@
+body{
+    background-image: url("../images/space.jpg");
+    background-size: 100%;
+}
+
+#top-div{
+    color: lightgrey;
+    
+    text-align: center;
+
+    margin-top: 100px;
+}
+
+#cards-div{
+    margin-top: 50px;
+}
+
+.card{
+    background-color: #C63C32;
+    opacity: 41%;
+
+    text-align: center;
+}
