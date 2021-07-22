@@ -1,6 +1,7 @@
 body{
     background-image: url("../images/space.jpg");
     background-size: cover;
+    background-repeat: no-repeat;
 }
 
 #navbar-image{
@@ -72,4 +73,29 @@ body{
 .modal-content{
     background-color: #b84717;
     color: #f0f0f0;
+}
+
+/* Page Stream.html */
+
+#streamDiv{
+    margin-top: 50px;
+    background-color: #eae8e7;
+    border-radius: 10px;
+    opacity:51%;
+}
+
+.embed-responsive iframe{
+    height: 100%;
+    width: 100%;
+}
+
+#videoLinkDiv{
+    display: flex;
+}
+
+#videoLinkDiv input{
+    opacity: 50%;
+    height: fit-content;
+    margin-top: auto;
+    margin-right: 2%;
 }
