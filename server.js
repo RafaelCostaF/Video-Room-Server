@@ -5,6 +5,7 @@ const upload = require('express-fileupload')
 const app = express()
 const server = require('http').Server(app)
 const io = require('socket.io')(server)
+const formidable = require('formidable')
 
 app.set('views','./public')
 app.set('view engine','ejs')
@@ -79,9 +80,7 @@ app.get("/video", (req,res) => {
         var videoPath = filename
         var videoSize = fs.statSync(filename).size
     } else{
-        // get video stats (about 61MB)
-        var videoPath = "./uploads/bigbuck.mp4";
-        var videoSize = fs.statSync("./uploads/bigbuck.mp4").size;
+        res.redirect('/')
     }
     
     const range = req.headers.range;
@@ -114,23 +113,25 @@ app.get("/video", (req,res) => {
     videoStream.pipe(res);
 })
 
-app.use(upload())
 
-app.post('/upload',(req,res) =>{
-    if(req.files){
-        var file = req.files.file
-        var ext = path.extname(file.name||'').split('.')
-        var filename = req.headers.referer.split('/')
-        filename = filename[filename.length-1] + '.' + ext[ext.length-1]
-        file.mv('./uploads/'+filename,function (err){
-            if(err){
-                res.send(err)
-            } else{
-                res.redirect(req.headers.referer)
-            }
-        })
-    }
+app.post('/room', (req,res) => {
+    var formData = formidable.IncomingForm()
+    formData.parse(req, function(error,fields,files){
+
+        var ext = files.file.name.split('.')[files.file.name.split('.').length-1]
+        if (rooms[fields.streamid] != null || ext != 'mp4'){
+            return res.redirect('/')
+        } 
+        else{
+            rooms[fields.streamid] = {"users" : {} }
+            var newPath = "./uploads/" + fields.streamid + '.' + ext;
+            fs.rename(files.file.path, newPath, function (errorRename) {
+                res.redirect(fields.streamid)
+            })
+        }
+    })
 })
+
 
 app.get('/:room', (req,res) => {
     if(rooms[req.params.room] == null){
@@ -144,14 +145,6 @@ app.post('/joinroom' , (req,res) => {
         return res.redirect('/')
     }
     else return res.redirect(req.body.streamid)
-})
-
-app.post('/room', (req,res) => {
-    if (rooms[req.body.streamid] != null){
-        return res.redirect('/')
-    }
-    rooms[req.body.streamid] = { users : {}}
-    res.redirect(req.body.streamid)
 })
 
 server.listen(8000)
