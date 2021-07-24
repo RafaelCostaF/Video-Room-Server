@@ -128,6 +128,11 @@ app.post('/room', (req,res) => {
         } 
         else{
             rooms[fields.streamid] = {"users" : {} }
+            var dir = './uploads';
+
+            if (!fs.existsSync(dir)){
+                fs.mkdirSync(dir);
+            }
             var newPath = "./uploads/" + fields.streamid + '.' + ext;
             fs.rename(files.file.path, newPath, function (errorRename) {
                 res.redirect(fields.streamid)
