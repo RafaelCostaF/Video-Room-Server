@@ -1,5 +1,4 @@
-# Challenge
- Challenge for e-rural
+# Video Room Server
 
 Instructions : 
 - Download
